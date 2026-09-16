@@ -46,6 +46,7 @@
     --radius:10px;
     --radius-sm:7px;
     --radius-lg:14px;
+    --level-line:#cbd5e1;
   }
   [data-theme="dark"]{
     --bg:#0b1020;
@@ -84,6 +85,7 @@
     --shadow:0 4px 14px rgba(0,0,0,0.35),0 1px 3px rgba(0,0,0,0.25);
     --shadow-md:0 10px 28px rgba(0,0,0,0.45);
     --shadow-lg:0 20px 50px rgba(0,0,0,0.55);
+    --level-line:#334155;
   }
 
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -120,282 +122,148 @@
     font-size:16px;
     box-shadow:0 4px 12px rgba(99,102,241,0.45);
   }
-  header h1{
-    font-size:17px;
-    font-weight:650;
-    letter-spacing:0.3px;
-  }
-  header .subtitle{
-    margin-left:12px;
-    font-size:12px;
-    color:var(--header-sub);
-    font-weight:400;
-    opacity:.85;
-  }
+  header h1{font-size:17px;font-weight:650;letter-spacing:0.3px;}
+  header .subtitle{margin-left:12px;font-size:12px;color:var(--header-sub);font-weight:400;opacity:.85;}
   header .spacer{flex:1;}
   header .badge{
-    background:rgba(255,255,255,0.10);
-    color:#e0e7ff;
-    font-size:11px;
-    padding:4px 10px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,0.14);
-    backdrop-filter:blur(4px);
-    margin-right:8px;
+    background:rgba(255,255,255,0.10);color:#e0e7ff;font-size:11px;
+    padding:4px 10px;border-radius:12px;border:1px solid rgba(255,255,255,0.14);
+    backdrop-filter:blur(4px);margin-right:8px;
   }
   .theme-toggle{
-    width:36px;height:36px;
-    border-radius:10px;
+    width:36px;height:36px;border-radius:10px;
     border:1px solid rgba(255,255,255,0.18);
-    background:rgba(255,255,255,0.08);
-    color:#fde68a;
-    cursor:pointer;
-    display:flex;align-items:center;justify-content:center;
-    font-size:16px;
-    transition:all .2s;
+    background:rgba(255,255,255,0.08);color:#fde68a;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;
   }
-  .theme-toggle:hover{
-    background:rgba(255,255,255,0.16);
-    transform:rotate(15deg);
-  }
+  .theme-toggle:hover{background:rgba(255,255,255,0.16);transform:rotate(15deg);}
+  .theme-toggle svg{transition:transform .35s cubic-bezier(.2,.8,.3,1);}
+  [data-theme="dark"] .theme-toggle svg{transform:rotate(180deg);}
 
   /* ============ 主布局 ============ */
-  .layout{
-    display:flex;
-    height:calc(100vh - 60px);
-  }
-  .pane{
-    overflow-y:auto;
-    padding:18px 22px;
-  }
-  .pane-left{
-    flex:1.15;
-    border-right:1px solid var(--border);
-    background:transparent;
-    min-width:400px;
-  }
-  .pane-right{
-    flex:0.85;
-    background:var(--panel-2);
-    min-width:380px;
-    display:flex;
-    flex-direction:column;
-  }
+  .layout{display:flex;height:calc(100vh - 60px);}
+  .pane{overflow-y:auto;padding:18px 22px;}
+  .pane-left{flex:1.15;border-right:1px solid var(--border);background:transparent;min-width:420px;}
+  .pane-right{flex:0.85;background:var(--panel-2);min-width:380px;display:flex;flex-direction:column;}
 
   /* ============ 工具栏 ============ */
   .toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:8px;
-    margin-bottom:16px;
-    position:sticky;
-    top:-18px;
-    padding:14px 0 14px;
-    z-index:8;
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+    margin-bottom:16px;position:sticky;top:-18px;padding:14px 0 14px;z-index:8;
   }
-  .toolbar::before{
-    content:"";
-    position:absolute;
-    inset:-18px 0 -14px 0;
-    background:var(--bg-grad);
-    z-index:-1;
-  }
+  .toolbar::before{content:"";position:absolute;inset:-18px 0 -14px 0;background:var(--bg-grad);z-index:-1;}
   .btn{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    border:1px solid var(--border);
-    background:var(--panel);
-    color:var(--text);
-    padding:8px 14px;
-    border-radius:var(--radius-sm);
-    font-size:13px;
-    cursor:pointer;
-    transition:all .15s ease;
-    font-weight:500;
-    white-space:nowrap;
-    box-shadow:var(--shadow-sm);
+    display:inline-flex;align-items:center;gap:6px;
+    border:1px solid var(--border);background:var(--panel);color:var(--text);
+    padding:8px 14px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;
+    transition:all .15s ease;font-weight:500;white-space:nowrap;box-shadow:var(--shadow-sm);
   }
-  .btn:hover{
-    border-color:var(--border-strong);
-    box-shadow:var(--shadow);
-    transform:translateY(-1px);
-  }
+  .btn:hover{border-color:var(--border-strong);box-shadow:var(--shadow);transform:translateY(-1px);}
   .btn:active{transform:translateY(0);}
   .btn-primary{
     background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#fff;
-    border-color:transparent;
-    box-shadow:0 4px 12px var(--accent-ring);
+    color:#fff;border-color:transparent;box-shadow:0 4px 12px var(--accent-ring);
   }
-  .btn-primary:hover{
-    filter:brightness(1.06);
-    box-shadow:0 6px 16px var(--accent-ring);
-  }
-  .btn-danger{
-    color:var(--danger);
-    border-color:var(--danger-border);
-    background:var(--danger-soft);
-  }
-  .btn-danger:hover{
-    background:var(--danger-soft);
-    filter:brightness(1.04);
-  }
+  .btn-primary:hover{filter:brightness(1.06);box-shadow:0 6px 16px var(--accent-ring);}
+  .btn-danger{color:var(--danger);border-color:var(--danger-border);background:var(--danger-soft);}
+  .btn-danger:hover{background:var(--danger-soft);filter:brightness(1.04);}
   .btn-ghost{background:transparent;box-shadow:none;border-color:transparent;}
   .btn-ghost:hover{background:var(--panel-3);box-shadow:none;}
 
-  /* 模板选择器 */
-  .tpl-wrap{
-    margin-left:auto;
-    display:flex;align-items:center;gap:6px;
-    padding-left:8px;
-  }
-  .tpl-label{
-    font-size:12px;color:var(--muted);font-weight:500;
-  }
+  .tpl-wrap{margin-left:auto;display:flex;align-items:center;gap:6px;padding-left:8px;}
+  .tpl-label{font-size:12px;color:var(--muted);font-weight:500;}
   .tpl-select{
-    appearance:none;
-    -webkit-appearance:none;
-    border:1px solid var(--border);
-    background:var(--panel);
-    color:var(--text);
-    padding:8px 32px 8px 12px;
-    border-radius:var(--radius-sm);
-    font-size:13px;
-    cursor:pointer;
-    font-weight:500;
-    box-shadow:var(--shadow-sm);
+    appearance:none;-webkit-appearance:none;
+    border:1px solid var(--border);background:var(--panel);color:var(--text);
+    padding:8px 32px 8px 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;
+    font-weight:500;box-shadow:var(--shadow-sm);
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M2 3l3 3 3-3' stroke='%2364748b' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-    background-repeat:no-repeat;
-    background-position:right 10px center;
-    transition:all .15s;
-    min-width:180px;
+    background-repeat:no-repeat;background-position:right 10px center;transition:all .15s;min-width:180px;
   }
   .tpl-select:hover{border-color:var(--border-strong);}
-  .tpl-select:focus{
-    outline:none;
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px var(--accent-ring);
-  }
+  .tpl-select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring);}
 
   /* ============ 维度卡片 ============ */
   .cards-wrap{display:flex;flex-direction:column;gap:14px;}
   .card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    overflow:hidden;
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
     transition:box-shadow .18s,border-color .18s,transform .1s;
   }
   .card:hover{box-shadow:var(--shadow-md);}
-  .card.drag-over{
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px var(--accent-ring),var(--shadow-md);
-  }
+  .card.drag-over{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring),var(--shadow-md);}
   .card.dragging{opacity:.55;transform:scale(.992);}
+  /* 子维度卡片：更紧凑 */
+  .card.card-sub{
+    border-radius:var(--radius-sm);
+    box-shadow:var(--shadow-sm);
+  }
+  .card.card-sub .card-head{padding:7px 8px 7px 4px;}
+  .card.card-sub .card-body{padding:7px 8px 8px;}
+  .card.card-sub .value-area{min-height:58px;font-size:12.5px;padding:8px 10px;}
+  .card.card-sub .key-input{font-size:12.5px;font-weight:600;padding:6px 10px;}
+  .card.card-sub .card-index{font-size:10px;padding:1px 6px;min-width:24px;}
+  .card.card-sub .icon-btn{width:26px;height:26px;font-size:12px;}
+
   .card-head{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 10px 9px 6px;
-    background:var(--panel-3);
-    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:8px;
+    padding:9px 10px 9px 6px;background:var(--panel-3);border-bottom:1px solid var(--border);
   }
   .drag-handle{
-    cursor:grab;
-    color:var(--muted-2);
-    padding:5px 6px;
-    border-radius:5px;
-    user-select:none;
-    display:inline-flex;
-    align-items:center;
-    font-size:14px;
-    line-height:1;
-    transition:all .15s;
+    cursor:grab;color:var(--muted-2);padding:5px 6px;border-radius:5px;
+    user-select:none;display:inline-flex;align-items:center;font-size:14px;line-height:1;transition:all .15s;
   }
   .drag-handle:hover{background:var(--panel-2);color:var(--muted);}
   .drag-handle:active{cursor:grabbing;}
   .card-index{
-    font-size:11px;
-    color:var(--muted);
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:5px;
-    padding:2px 8px;
-    min-width:28px;
-    text-align:center;
-    font-weight:600;
-    font-variant-numeric:tabular-nums;
+    font-size:11px;color:var(--muted);background:var(--panel);
+    border:1px solid var(--border);border-radius:5px;padding:2px 8px;min-width:28px;
+    text-align:center;font-weight:600;font-variant-numeric:tabular-nums;
   }
   .key-input{
-    flex:1;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    padding:7px 11px;
-    font-size:13px;
-    font-family:inherit;
-    background:var(--panel);
-    color:var(--text);
-    transition:all .15s;
-    min-width:0;
-    font-weight:600;
+    flex:1;border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:7px 11px;font-size:13px;font-family:inherit;background:var(--panel);
+    color:var(--text);transition:all .15s;min-width:0;font-weight:600;
   }
   .key-input::placeholder{color:var(--muted-2);font-weight:400;}
-  .key-input:focus{
-    outline:none;
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px var(--accent-ring);
-  }
+  .key-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring);}
   .card-actions{display:flex;gap:5px;}
   .icon-btn{
-    width:30px;height:30px;
-    display:inline-flex;
-    align-items:center;justify-content:center;
-    border:1px solid var(--border);
-    background:var(--panel);
-    border-radius:var(--radius-sm);
-    cursor:pointer;
-    color:var(--muted);
-    font-size:13px;
-    transition:all .15s;
-    line-height:1;
+    width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;
+    border:1px solid var(--border);background:var(--panel);border-radius:var(--radius-sm);
+    cursor:pointer;color:var(--muted);font-size:13px;transition:all .15s;line-height:1;
   }
   .icon-btn:hover{color:var(--text);border-color:var(--border-strong);background:var(--panel-2);}
   .icon-btn.up:hover,.icon-btn.down:hover{color:var(--accent);border-color:var(--accent);}
   .icon-btn.del:hover{color:var(--danger);border-color:var(--danger);background:var(--danger-soft);}
   .card-body{padding:9px 10px 10px;}
   .value-area{
-    width:100%;
-    min-height:88px;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    padding:9px 11px;
-    font-size:13px;
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-    resize:vertical;
-    background:var(--panel-2);
-    color:var(--text);
-    line-height:1.55;
-    transition:all .15s;
+    width:100%;min-height:84px;border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:9px 11px;font-size:13px;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+    resize:vertical;background:var(--panel-2);color:var(--text);line-height:1.55;transition:all .15s;
   }
   .value-area::placeholder{color:var(--muted-2);}
-  .value-area:focus{
-    outline:none;
-    border-color:var(--accent);
-    box-shadow:0 0 0 3px var(--accent-ring);
-    background:var(--panel);
+  .value-area:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring);background:var(--panel);}
+
+  /* 子维度容器：缩进 + 左竖线 */
+  .children-wrap{
+    margin-top:10px;padding-left:16px;
+    border-left:2px solid var(--level-line);
+    display:flex;flex-direction:column;gap:10px;
   }
+  /* 添加子维度按钮 */
+  .add-sub-btn{
+    margin-top:8px;align-self:flex-start;
+    font-size:12px;padding:5px 10px;border-radius:5px;
+    color:var(--accent);border:1px dashed var(--border-strong);background:transparent;
+    box-shadow:none;
+  }
+  .add-sub-btn:hover{background:var(--accent-soft);border-color:var(--accent);border-style:solid;transform:none;}
 
   /* ============ 空状态 ============ */
   .empty{
-    text-align:center;
-    padding:60px 20px;
-    color:var(--muted);
-    border:2px dashed var(--border-strong);
-    border-radius:var(--radius-lg);
-    background:var(--panel);
+    text-align:center;padding:60px 20px;color:var(--muted);
+    border:2px dashed var(--border-strong);border-radius:var(--radius-lg);background:var(--panel);
   }
   .empty .ico{font-size:42px;margin-bottom:14px;opacity:.45;}
   .empty p{font-size:13px;line-height:1.7;}
@@ -403,166 +271,71 @@
 
   /* ============ 右侧预览 ============ */
   .preview-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:16px 22px 12px;
-    border-bottom:1px solid var(--border);
-    background:var(--panel);
-    position:sticky;top:0;z-index:5;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 22px 12px;border-bottom:1px solid var(--border);background:var(--panel);position:sticky;top:0;z-index:5;
   }
-  .preview-title{
-    font-size:14px;
-    font-weight:600;
-    display:flex;align-items:center;gap:9px;
-    color:var(--text);
-  }
-  .preview-title .dot{
-    width:9px;height:9px;border-radius:50%;
-    background:var(--success);
-    box-shadow:0 0 0 3px var(--success-soft);
-    transition:all .2s;
-  }
-  .preview-title .dot.err{
-    background:var(--danger);
-    box-shadow:0 0 0 3px var(--danger-soft);
-  }
-  .preview-body{
-    flex:1;
-    overflow:auto;
-    padding:16px 22px;
-  }
+  .preview-title{font-size:14px;font-weight:600;display:flex;align-items:center;gap:9px;color:var(--text);}
+  .preview-title .dot{width:9px;height:9px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px var(--success-soft);transition:all .2s;}
+  .preview-title .dot.err{background:var(--danger);box-shadow:0 0 0 3px var(--danger-soft);}
+  .preview-body{flex:1;overflow:auto;padding:16px 22px;}
   .json-view{
-    background:var(--code-bg);
-    color:var(--code-fg);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:18px;
+    background:var(--code-bg);color:var(--code-fg);
+    border:1px solid var(--border);border-radius:var(--radius);padding:18px;
     font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
-    font-size:13px;
-    line-height:1.65;
-    white-space:pre-wrap;
-    word-break:break-all;
-    min-height:220px;
-    overflow:auto;
-    box-shadow:var(--shadow);
+    font-size:13px;line-height:1.65;white-space:pre-wrap;word-break:break-all;
+    min-height:220px;overflow:auto;box-shadow:var(--shadow);
   }
   .json-view .k{color:var(--code-k);}
   .json-view .s{color:var(--code-s);}
   .json-view .n{color:var(--code-n);}
   .json-view .b{color:var(--code-b);}
   .json-view .p{color:var(--code-p);}
-  .json-view .cmt{color:var(--code-cmit);font-style:italic;}
+  .json-view .cmt{color:var(--code-cmt);font-style:italic;}
   .json-err{
-    margin-top:12px;
-    background:var(--danger-soft);
-    border:1px solid var(--danger-border);
-    color:var(--danger);
-    padding:11px 14px;
-    border-radius:var(--radius-sm);
-    font-size:12px;
-    font-family:"SFMono-Regular",Consolas,monospace;
-    white-space:pre-wrap;
-    word-break:break-all;
-    line-height:1.6;
+    margin-top:12px;background:var(--danger-soft);border:1px solid var(--danger-border);
+    color:var(--danger);padding:11px 14px;border-radius:var(--radius-sm);
+    font-size:12px;font-family:"SFMono-Regular",Consolas,monospace;white-space:pre-wrap;word-break:break-all;line-height:1.6;
   }
   .preview-foot{
-    padding:12px 22px 16px;
-    color:var(--muted);
-    font-size:12px;
-    border-top:1px solid var(--border);
-    background:var(--panel);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    padding:12px 22px 16px;color:var(--muted);font-size:12px;
+    border-top:1px solid var(--border);background:var(--panel);display:flex;justify-content:space-between;align-items:center;
   }
   .stat{display:flex;gap:18px;}
   .stat b{color:var(--text);font-weight:600;font-variant-numeric:tabular-nums;}
-  .auto-save{
-    display:inline-flex;align-items:center;gap:5px;
-    color:var(--muted);
-  }
-  .auto-save::before{
-    content:"";width:6px;height:6px;border-radius:50%;
-    background:var(--success);box-shadow:0 0 0 3px var(--success-soft);
-  }
+  .auto-save{display:inline-flex;align-items:center;gap:5px;color:var(--muted);}
+  .auto-save::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 0 3px var(--success-soft);}
 
   /* ============ 弹层 ============ */
   .modal-mask{
-    position:fixed;inset:0;
-    background:rgba(15,23,42,0.55);
-    display:none;
-    align-items:center;justify-content:center;
-    z-index:100;
-    backdrop-filter:blur(3px);
+    position:fixed;inset:0;background:rgba(15,23,42,0.55);display:none;
+    align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(3px);
   }
   .modal-mask.show{display:flex;animation:fadeIn .18s ease;}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .modal{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-lg);
-    width:580px;
-    max-width:92vw;
-    max-height:82vh;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    animation:popIn .2s cubic-bezier(.2,.8,.3,1);
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-lg);width:580px;max-width:92vw;max-height:82vh;
+    display:flex;flex-direction:column;overflow:hidden;animation:popIn .2s cubic-bezier(.2,.8,.3,1);
   }
   @keyframes popIn{from{transform:translateY(12px) scale(.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-  .modal-head{
-    padding:16px 20px;
-    border-bottom:1px solid var(--border);
-    display:flex;justify-content:space-between;align-items:center;
-  }
+  .modal-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
   .modal-head h3{font-size:15px;font-weight:650;color:var(--text);}
   .modal-body{padding:16px 20px;flex:1;overflow:auto;}
   .modal-body textarea{
-    width:100%;
-    min-height:240px;
-    border:1px solid var(--border);
-    border-radius:var(--radius-sm);
-    padding:11px;
-    font-family:"SFMono-Regular",Consolas,monospace;
-    font-size:13px;
-    resize:vertical;
-    background:var(--panel-2);
-    color:var(--text);
-    line-height:1.6;
+    width:100%;min-height:240px;border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:11px;font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;
+    resize:vertical;background:var(--panel-2);color:var(--text);line-height:1.6;
   }
-  .modal-body textarea:focus{
-    outline:none;border-color:var(--accent);
-    box-shadow:0 0 0 3px var(--accent-ring);
-  }
+  .modal-body textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-ring);}
   .modal-hint{color:var(--muted);font-size:12px;margin-top:10px;line-height:1.6;}
-  .modal-hint.warn{color:var(--warn);}
-  .modal-foot{
-    padding:14px 20px;
-    border-top:1px solid var(--border);
-    display:flex;justify-content:flex-end;gap:8px;
-    background:var(--panel-3);
-  }
+  .modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;background:var(--panel-3);}
 
-  /* ============ 提示 Toast ============ */
+  /* ============ Toast ============ */
   .toast{
-    position:fixed;
-    bottom:34px;
-    left:50%;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--text);
-    color:var(--panel);
-    padding:11px 20px;
-    border-radius:24px;
-    font-size:13px;
-    font-weight:500;
-    box-shadow:var(--shadow-lg);
-    opacity:0;
-    pointer-events:none;
-    transition:all .25s cubic-bezier(.2,.8,.3,1);
-    z-index:200;
-    max-width:80vw;
+    position:fixed;bottom:34px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--text);color:var(--panel);padding:11px 20px;border-radius:24px;
+    font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;
+    transition:all .25s cubic-bezier(.2,.8,.3,1);z-index:200;max-width:80vw;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   .toast.err{background:var(--danger);color:#fff;}
@@ -575,17 +348,13 @@
   ::-webkit-scrollbar-thumb:hover{background:var(--muted-2);}
   .json-view::-webkit-scrollbar-thumb{background:#334155;}
   .json-view::-webkit-scrollbar-thumb:hover{background:#475569;}
-
-  /* ============ 主题切换动画 ============ */
-  .theme-toggle svg{transition:transform .35s cubic-bezier(.2,.8,.3,1);}
-  [data-theme="dark"] .theme-toggle svg{transform:rotate(180deg);}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">⚙</div>
   <h1>JSON 提示词拆分编辑工具</h1>
-  <span class="subtitle">维度卡片化 · 实时预览 · 拖拽排序 · 模板库</span>
+  <span class="subtitle">维度卡片化 · 嵌套子维度 · 实时预览 · 拖拽排序</span>
   <div class="spacer"></div>
   <span class="badge">纯前端 · 单文件</span>
   <button class="theme-toggle" id="themeToggle" title="切换深色/浅色模式">
@@ -597,7 +366,6 @@
 </header>
 
 <div class="layout">
-  <!-- 左侧维度编辑区 -->
   <section class="pane pane-left">
     <div class="toolbar">
       <button class="btn btn-primary" id="btnAdd">+ 添加维度</button>
@@ -617,7 +385,6 @@
     <div class="cards-wrap" id="cardsWrap"></div>
   </section>
 
-  <!-- 右侧JSON预览区 -->
   <section class="pane-right">
     <div class="preview-head">
       <div class="preview-title">
@@ -640,7 +407,6 @@
   </section>
 </div>
 
-<!-- 导入JSON弹层 -->
 <div class="modal-mask" id="importModal">
   <div class="modal">
     <div class="modal-head">
@@ -648,8 +414,8 @@
       <button class="icon-btn" id="importClose">×</button>
     </div>
     <div class="modal-body">
-      <textarea id="importText" placeholder='在此粘贴标准 JSON 对象，例如：&#10;{&#10;  "角色": "资深前端工程师",&#10;  "任务": "重构登录模块",&#10;  "约束": "保持现有布局不变"&#10;}'></textarea>
-      <div class="modal-hint">仅支持 JSON 对象（键值对），导入后会覆盖当前维度。</div>
+      <textarea id="importText" placeholder='在此粘贴标准 JSON 对象，支持嵌套，例如：&#10;{&#10;  "角色": {&#10;    "value": "资深前端工程师",&#10;    "背景": "重构5年电商后台",&#10;    "技能": "Vue3 / TS / Vite"&#10;  },&#10;  "任务": "拆分巨型组件"&#10;}'></textarea>
+      <div class="modal-hint">支持 JSON 对象与多层嵌套。子对象会自动解析为子维度卡片；若对象含 <code>value</code> 字段则作为该维度自身值，其余属性作为子维度。导入后会覆盖当前内容。</div>
     </div>
     <div class="modal-foot">
       <button class="btn btn-ghost" id="importCancel">取消</button>
@@ -665,9 +431,9 @@
   "use strict";
 
   /* ================== 配置 ================== */
-  var STORAGE_KEY    = "json_prompt_split_editor_v1";
+  var STORAGE_KEY    = "json_prompt_split_editor_v2";   // v2：结构升级，含 children
   var THEME_KEY      = "json_prompt_split_editor_theme";
-  var LAST_TPL_KEY  = "json_prompt_split_editor_lasttpl";
+  var LAST_TPL_KEY   = "json_prompt_split_editor_lasttpl";
 
   /* ================== 预设模板 ================== */
   var TEMPLATES = {
@@ -724,8 +490,9 @@
   };
 
   /* ================== 状态 ================== */
-  var cards = [];
-  var dragSrcIndex = null;
+  var cards = [];            // 顶层节点：{key,value,children:[]}
+  var dragSrcPath = null;    // 拖拽源路径（数组）
+  var pendingFocusPath = null;
 
   var $ = function(id){return document.getElementById(id);};
   var cardsWrap = $("cardsWrap");
@@ -737,7 +504,7 @@
   var toastEl   = $("toast");
   var tplSelect = $("tplSelect");
 
-  /* ================== 工具函数 ================== */
+  /* ================== 工具 ================== */
   function escapeHtml(s){
     return String(s).replace(/[&<>]/g,function(c){
       return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;";
@@ -749,23 +516,22 @@
     clearTimeout(toast._t);
     toast._t = setTimeout(function(){ toastEl.className = "toast"; },1800);
   }
+  function cloneNode(n){
+    return {
+      key:n.key||"",
+      value:n.value||"",
+      children:(n.children||[]).map(cloneNode)
+    };
+  }
 
   /* ================== 主题 ================== */
-  function getStoredTheme(){
-    try{ return localStorage.getItem(THEME_KEY); }catch(e){ return null; }
-  }
-  function storeTheme(t){
-    try{ localStorage.setItem(THEME_KEY,t); }catch(e){}
-  }
-  function applyTheme(t){
-    document.documentElement.setAttribute("data-theme",t);
-  }
+  function getStoredTheme(){ try{return localStorage.getItem(THEME_KEY);}catch(e){return null;} }
+  function storeTheme(t){ try{localStorage.setItem(THEME_KEY,t);}catch(e){} }
+  function applyTheme(t){ document.documentElement.setAttribute("data-theme",t); }
   function initTheme(){
     var stored = getStoredTheme();
-    if(stored === "dark" || stored === "light"){
-      applyTheme(stored);
-    }else{
-      // 跟随系统
+    if(stored === "dark" || stored === "light"){ applyTheme(stored); }
+    else{
       var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       applyTheme(prefersDark ? "dark" : "light");
     }
@@ -773,15 +539,12 @@
   function toggleTheme(){
     var cur = document.documentElement.getAttribute("data-theme") || "light";
     var next = cur === "dark" ? "light" : "dark";
-    applyTheme(next);
-    storeTheme(next);
+    applyTheme(next); storeTheme(next);
     toast(next === "dark" ? "已切换到深色模式" : "已切换到浅色模式","ok");
   }
 
   /* ================== 持久化 ================== */
-  function save(){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(cards)); }catch(e){}
-  }
+  function save(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(cards)); }catch(e){} }
   function load(){
     try{
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -792,77 +555,216 @@
     return null;
   }
 
-  /* ================== 卡片渲染 ================== */
-  function renderCards(){
+  /* ================== 路径操作 ================== */
+  // 根据路径取节点
+  function getNode(path){
+    if(path.length === 0) return null;
+    var arr = cards;
+    var node = null;
+    for(var i=0;i<path.length;i++){
+      if(!arr || path[i] >= arr.length || path[i] < 0) return null;
+      node = arr[path[i]];
+      arr = node.children || (node.children = []);
+    }
+    return node;
+  }
+  // 取路径对应的容器数组与末位索引
+  function getContainer(path){
+    if(path.length === 0) return null;
+    var arr = cards;
+    for(var i=0;i<path.length-1;i++){
+      if(!arr || !arr[path[i]]) return null;
+      arr = arr[path[i]].children || (arr[path[i]].children = []);
+    }
+    var idx = path[path.length-1];
+    if(!arr || idx < 0 || idx >= arr.length) return null;
+    return { array:arr, index:idx };
+  }
+  function pathEqual(a,b){
+    if(a.length !== b.length) return false;
+    for(var i=0;i<a.length;i++) if(a[i] !== b[i]) return false;
+    return true;
+  }
+  function sameLevel(a,b){
+    if(a.length !== b.length) return false;
+    for(var i=0;i<a.length-1;i++) if(a[i] !== b[i]) return false;
+    return true;
+  }
+
+  /* ================== 渲染 ================== */
+  function renderAll(){
     cardsWrap.innerHTML = "";
     if(cards.length === 0){
       var empty = document.createElement("div");
       empty.className = "empty";
       empty.innerHTML = '<div class="ico">⊞</div>'+
         '<p>还没有维度，点击上方 <b>添加维度</b> 开始编辑<br/>'+
-        '或在右上角 <b>模板</b> 选择预设快速生成卡片</p>';
+        '或在右上角 <b>模板</b> 选择预设快速生成卡片<br/>每个维度下还可继续 <b>添加子维度</b> 实现多层嵌套</p>';
       cardsWrap.appendChild(empty);
       return;
     }
-    cards.forEach(function(card,i){
-      cardsWrap.appendChild(buildCard(card,i));
+    cards.forEach(function(c,i){
+      cardsWrap.appendChild(buildCard(c,[i],0));
     });
+    if(pendingFocusPath){
+      var el = cardsWrap.querySelector('[data-path="'+pendingFocusPath.join(",")+'"]');
+      if(el){
+        var inp = el.querySelector(".key-input");
+        if(inp){ inp.focus(); }
+      }
+      pendingFocusPath = null;
+    }
   }
 
-  function buildCard(card,index){
+  function buildCard(node,path,depth){
     var el = document.createElement("div");
-    el.className = "card";
+    el.className = "card" + (depth > 0 ? " card-sub" : "");
     el.setAttribute("draggable","true");
-    el.dataset.index = String(index);
-    el.innerHTML =
-      '<div class="card-head">'+
-        '<span class="drag-handle" title="拖拽排序">⋮⋮</span>'+
-        '<span class="card-index">'+(index+1)+'</span>'+
-        '<input class="key-input" type="text" placeholder="维度 key（如：角色）" value="'+escapeHtml(card.key)+'" />'+
-        '<div class="card-actions">'+
-          '<button class="icon-btn up" title="上移">▲</button>'+
-          '<button class="icon-btn down" title="下移">▼</button>'+
-          '<button class="icon-btn del" title="删除">✕</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="card-body">'+
-        '<textarea class="value-area" placeholder="维度 value（支持长文本）">'+escapeHtml(card.value)+'</textarea>'+
+    el.dataset.path = path.join(",");
+
+    var head = document.createElement("div");
+    head.className = "card-head";
+    head.innerHTML =
+      '<span class="drag-handle" title="拖拽排序">⋮⋮</span>'+
+      '<span class="card-index">'+(path[path.length-1]+1)+'</span>'+
+      '<input class="key-input" type="text" placeholder="维度 key（如：角色）" value="'+escapeHtml(node.key)+'" />'+
+      '<div class="card-actions">'+
+        '<button class="icon-btn up" title="上移">▲</button>'+
+        '<button class="icon-btn down" title="下移">▼</button>'+
+        '<button class="icon-btn del" title="删除">✕</button>'+
       '</div>';
+    el.appendChild(head);
 
-    var keyInput = el.querySelector(".key-input");
-    var valueArea = el.querySelector(".value-area");
+    var body = document.createElement("div");
+    body.className = "card-body";
 
+    var valueArea = document.createElement("textarea");
+    valueArea.className = "value-area";
+    valueArea.placeholder = "维度 value（支持长文本；若添加了子维度，本值会以 value 字段输出到对象）";
+    valueArea.value = node.value || "";
+    body.appendChild(valueArea);
+
+    // 子维度列表
+    if(node.children && node.children.length){
+      var subWrap = document.createElement("div");
+      subWrap.className = "children-wrap";
+      node.children.forEach(function(child,i){
+        subWrap.appendChild(buildCard(child, path.concat(i), depth+1));
+      });
+      body.appendChild(subWrap);
+    }
+
+    // 添加子维度按钮
+    var addSubBtn = document.createElement("button");
+    addSubBtn.className = "btn btn-ghost add-sub-btn";
+    addSubBtn.type = "button";
+    addSubBtn.innerHTML = "＋ 添加子维度";
+    addSubBtn.addEventListener("click",function(e){
+      e.preventDefault();
+      addNode(path);   // 向当前节点添加子维度
+    });
+    body.appendChild(addSubBtn);
+
+    el.appendChild(body);
+
+    // 事件
+    var keyInput = head.querySelector(".key-input");
     keyInput.addEventListener("input",function(){
-      card.key = keyInput.value;
+      node.key = keyInput.value;
       save(); renderPreview();
     });
     valueArea.addEventListener("input",function(){
-      card.value = valueArea.value;
+      node.value = valueArea.value;
       save(); renderPreview();
     });
+    head.querySelector(".up").addEventListener("click",function(){ moveNode(path,-1); });
+    head.querySelector(".down").addEventListener("click",function(){ moveNode(path,1); });
+    head.querySelector(".del").addEventListener("click",function(){ delNode(path); });
 
-    el.querySelector(".up").addEventListener("click",function(){move(index,-1);});
-    el.querySelector(".down").addEventListener("click",function(){move(index,1);});
-    el.querySelector(".del").addEventListener("click",function(){delCard(index);});
+    attachDrag(el, path);
+    return el;
+  }
 
-    // 拖拽
+  /* ================== 节点操作 ================== */
+  function addNode(parentPath){
+    var node = { key:"", value:"", children:[] };
+    var newPath;
+    if(parentPath.length === 0){
+      cards.push(node);
+      newPath = [cards.length - 1];
+    } else {
+      var parent = getNode(parentPath);
+      if(!parent) return;
+      if(!parent.children) parent.children = [];
+      parent.children.push(node);
+      newPath = parentPath.concat(parent.children.length - 1);
+    }
+    pendingFocusPath = newPath;
+    save(); renderAll(); renderPreview();
+  }
+  function delNode(path){
+    var c = getContainer(path);
+    if(!c) return;
+    c.array.splice(c.index,1);
+    save(); renderAll(); renderPreview();
+    toast("已删除维度");
+  }
+  function moveNode(path,dir){
+    var c = getContainer(path);
+    if(!c) return;
+    var target = c.index + dir;
+    if(target < 0 || target >= c.array.length) return;
+    var tmp = c.array[c.index];
+    c.array[c.index] = c.array[target];
+    c.array[target] = tmp;
+    save(); renderAll(); renderPreview();
+  }
+  function reorder(fromPath,toPath){
+    if(fromPath.length !== toPath.length) return;
+    for(var i=0;i<fromPath.length-1;i++) if(fromPath[i] !== toPath[i]) return;
+    if(pathEqual(fromPath,toPath)) return;
+    var c = getContainer(fromPath);
+    if(!c) return;
+    var fromIdx = c.index;
+    var toIdx = toPath[toPath.length-1];
+    var item = c.array.splice(fromIdx,1)[0];
+    if(fromIdx < toIdx) toIdx = toIdx - 1;
+    c.array.splice(toIdx,0,item);
+    save(); renderAll(); renderPreview();
+  }
+
+  function clearAll(){
+    if(cards.length===0){toast("已经是空的");return;}
+    if(!confirm("确定要清空所有维度吗？此操作不可撤销。")) return;
+    cards = [];
+    save(); renderAll(); renderPreview();
+    toast("已清空");
+  }
+  function newJson(){
+    if(cards.length>0 && !confirm("新建将清空当前维度，是否继续？")) return;
+    cards = [];
+    addNode([]);
+  }
+
+  /* ================== 拖拽 ================== */
+  function attachDrag(el,path){
     el.addEventListener("dragstart",function(e){
-      dragSrcIndex = index;
+      dragSrcPath = path;
       el.classList.add("dragging");
       e.dataTransfer.effectAllowed = "move";
-      try{ e.dataTransfer.setData("text/plain", String(index)); }catch(err){}
+      try{ e.dataTransfer.setData("text/plain", path.join(",")); }catch(err){}
     });
     el.addEventListener("dragend",function(){
       el.classList.remove("dragging");
       Array.prototype.forEach.call(cardsWrap.querySelectorAll(".card"),function(c){
         c.classList.remove("drag-over");
       });
-      dragSrcIndex = null;
+      dragSrcPath = null;
     });
     el.addEventListener("dragover",function(e){
       e.preventDefault();
       e.dataTransfer.dropEffect = "move";
-      if(dragSrcIndex!==null && dragSrcIndex!==index){
+      if(dragSrcPath && sameLevel(dragSrcPath,path) && !pathEqual(dragSrcPath,path)){
         el.classList.add("drag-over");
       }
     });
@@ -872,48 +774,10 @@
     el.addEventListener("drop",function(e){
       e.preventDefault();
       el.classList.remove("drag-over");
-      if(dragSrcIndex===null || dragSrcIndex===index) return;
-      reorder(dragSrcIndex, index);
+      if(!dragSrcPath || pathEqual(dragSrcPath,path)) return;
+      if(!sameLevel(dragSrcPath,path)) return;   // 仅同层拖拽排序
+      reorder(dragSrcPath,path);
     });
-
-    return el;
-  }
-
-  /* ================== 卡片操作 ================== */
-  function addCard(key,value){
-    cards.push({key:key||"",value:value||""});
-    save(); renderCards(); renderPreview();
-  }
-  function delCard(index){
-    cards.splice(index,1);
-    save(); renderCards(); renderPreview();
-    toast("已删除维度");
-  }
-  function move(index,dir){
-    var target = index + dir;
-    if(target<0 || target>=cards.length) return;
-    var tmp = cards[index];
-    cards[index] = cards[target];
-    cards[target] = tmp;
-    save(); renderCards(); renderPreview();
-  }
-  function reorder(from,to){
-    if(from<0||from>=cards.length||to<0||to>=cards.length) return;
-    var item = cards.splice(from,1)[0];
-    cards.splice(to,0,item);
-    save(); renderCards(); renderPreview();
-  }
-  function clearAll(){
-    if(cards.length===0){toast("已经是空的");return;}
-    if(!confirm("确定要清空所有维度吗？此操作不可撤销。")) return;
-    cards = [];
-    save(); renderCards(); renderPreview();
-    toast("已清空");
-  }
-  function newJson(){
-    if(cards.length>0 && !confirm("新建将清空当前维度，是否继续？")) return;
-    cards = [];
-    addCard("","");
   }
 
   /* ================== 导入 ================== */
@@ -922,75 +786,114 @@
     $("importModal").classList.add("show");
     setTimeout(function(){$("importText").focus();},60);
   }
-  function closeImport(){
-    $("importModal").classList.remove("show");
-  }
+  function closeImport(){ $("importModal").classList.remove("show"); }
   function doImport(){
     var text = $("importText").value.trim();
     if(!text){toast("请粘贴JSON内容","err");return;}
     var obj;
-    try{
-      obj = JSON.parse(text);
-    }catch(e){
-      toast("JSON 解析失败："+e.message,"err");
-      return;
-    }
+    try{ obj = JSON.parse(text); }
+    catch(e){ toast("JSON 解析失败："+e.message,"err"); return; }
     if(obj===null || typeof obj!=="object" || Array.isArray(obj)){
-      toast("仅支持JSON对象（{}），不支持数组或基础类型","err");
-      return;
+      toast("仅支持JSON对象（{}），不支持数组或基础类型","err"); return;
     }
+    var arr = objToNodes(obj);
+    if(arr.length===0){toast("JSON对象为空","err");return;}
+    cards = arr;
+    save(); renderAll(); renderPreview();
+    closeImport();
+    toast("成功导入 "+arr.length+" 个维度","ok");
+  }
+  // 把任意 JSON 值转成节点（递归）
+  function valueToNode(key,v){
+    var node = { key:key, value:"", children:[] };
+    if(v === null){
+      node.value = "";
+    } else if(typeof v === "object"){
+      if(Array.isArray(v)){
+        node.value = JSON.stringify(v,null,2);
+      } else {
+        // 对象 → 容器节点；若含 value 字段（基础类型）则作为自身值
+        if(Object.prototype.hasOwnProperty.call(v,"value") && v.value!==null && typeof v.value!=="object"){
+          node.value = String(v.value);
+        } else if(Object.prototype.hasOwnProperty.call(v,"value") && v.value!==null){
+          node.value = JSON.stringify(v.value,null,2);
+        }
+        for(var ck in v){
+          if(ck === "value") continue;
+          if(Object.prototype.hasOwnProperty.call(v,ck)){
+            node.children.push(valueToNode(ck, v[ck]));
+          }
+        }
+      }
+    } else {
+      node.value = String(v);
+    }
+    return node;
+  }
+  function objToNodes(obj){
     var arr = [];
     for(var k in obj){
       if(Object.prototype.hasOwnProperty.call(obj,k)){
-        var v = obj[k];
-        var vs;
-        if(v===null) vs = "";
-        else if(typeof v==="object") vs = JSON.stringify(v,null,2);
-        else vs = String(v);
-        arr.push({key:k,value:vs});
+        arr.push(valueToNode(k, obj[k]));
       }
     }
-    if(arr.length===0){toast("JSON对象为空","err");return;}
-    cards = arr;
-    save(); renderCards(); renderPreview();
-    closeImport();
-    toast("成功导入 "+arr.length+" 个维度","ok");
+    return arr;
   }
 
   /* ================== 模板 ================== */
   function applyTemplate(key){
     var tpl = TEMPLATES[key];
     if(!tpl) return;
-    // 询问覆盖
-    var hasContent = cards.length>0 && (cards.some(function(c){return (c.key&&c.key.trim())||(c.value&&c.value.trim());}));
+    var hasContent = cards.length>0 && cards.some(function(c){
+      return (c.key && c.key.trim()) || (c.value && c.value.trim()) || (c.children && c.children.length);
+    });
     var msg = hasContent
       ? "加载模板【"+tpl.name+"】会覆盖当前编辑内容，是否继续？"
       : "加载模板【"+tpl.name+"】？";
     if(!confirm(msg)){
-      // 取消则重置下拉
       tplSelect.value = "";
       return;
     }
-    // 深拷贝模板项
-    cards = tpl.items.map(function(it){
-      return {key:it.key, value:it.value};
-    });
+    cards = tpl.items.map(function(it){ return {key:it.key, value:it.value, children:[]}; });
     try{ localStorage.setItem(LAST_TPL_KEY,key); }catch(e){}
-    save(); renderCards(); renderPreview();
+    save(); renderAll(); renderPreview();
     toast("已加载模板："+tpl.name+"（"+cards.length+" 个维度）","ok");
   }
 
-  /* ================== 预览 ================== */
+  /* ================== JSON 构建与预览 ================== */
+  // 节点 → JSON 值（递归）
+  function nodeValue(node){
+    if(!node.children || node.children.length === 0){
+      return node.value;
+    }
+    var obj = {};
+    if(node.value && node.value.trim()){
+      obj["value"] = node.value;
+    }
+    node.children.forEach(function(child){
+      var k = child.key.trim();
+      obj[k || ""] = nodeValue(child);
+    });
+    return obj;
+  }
   function buildResult(){
     var obj = {};
     cards.forEach(function(c){
       var k = c.key.trim();
-      obj[k||""] = c.value;
+      obj[k || ""] = nodeValue(c);
     });
     return obj;
   }
+  function countNodes(arr){
+    var n = 0;
+    (arr||[]).forEach(function(c){
+      n++;
+      n += countNodes(c.children);
+    });
+    return n;
+  }
   function renderPreview(){
-    statCount.textContent = cards.length;
+    statCount.textContent = countNodes(cards);
     if(cards.length===0){
       jsonView.innerHTML = '<span class="cmt">// 暂无维度，请在左侧添加</span>';
       statChars.textContent = "0";
@@ -1035,30 +938,23 @@
     var str;
     try{ str = JSON.stringify(buildResult(),null,2); }
     catch(e){ toast("JSON 错误，无法复制","err"); return; }
-    function done(ok){
-      if(ok){toast("已复制到剪贴板","ok");}
-      else{fallback(str);}
-    }
+    function done(ok){ if(ok){toast("已复制到剪贴板","ok");} else{fallback(str);} }
     function fallback(str){
       var ta = document.createElement("textarea");
       ta.value = str;
-      ta.style.position="fixed";
-      ta.style.top="-9999px";
-      document.body.appendChild(ta);
-      ta.select();
+      ta.style.position="fixed"; ta.style.top="-9999px";
+      document.body.appendChild(ta); ta.select();
       try{document.execCommand("copy");toast("已复制到剪贴板","ok");}
       catch(e){toast("复制失败","err");}
       document.body.removeChild(ta);
     }
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(str).then(function(){done(true);},function(){done(false);});
-    }else{
-      fallback(str);
-    }
+    }else{ fallback(str); }
   }
 
   /* ================== 事件绑定 ================== */
-  $("btnAdd").addEventListener("click",function(){addCard("","");});
+  $("btnAdd").addEventListener("click",function(){ addNode([]); });
   $("btnNew").addEventListener("click",newJson);
   $("btnImport").addEventListener("click",openImport);
   $("btnClear").addEventListener("click",clearAll);
@@ -1086,12 +982,19 @@
     if(loaded && loaded.length){
       cards = loaded;
     }else{
-      // 默认示例（与模板1一致以体现工具用途）
+      // 兼容旧版无 children 的数据，统一补 children
       cards = TEMPLATES.ai_role.items.map(function(it){
-        return {key:it.key,value:it.value};
+        return { key:it.key, value:it.value, children:[] };
       });
     }
-    renderCards();
+    // 兼容旧数据：补 children 字段
+    (function ensure(arr){
+      arr.forEach(function(c){
+        if(!c.children) c.children = [];
+        ensure(c.children);
+      });
+    })(cards);
+    renderAll();
     renderPreview();
   }
   init();
